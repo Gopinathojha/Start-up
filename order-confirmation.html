@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        /* Background Gradient */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #f47852, #ffcc80);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Confirmation Container */
+        .confirmation-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+            animation: bounce 1s ease;
+        }
+
+        /* Title Styling */
+        .confirmation-container h1 {
+            color: #444;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            text-align: left;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Total Amount Styling */
+        .total-amount {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ff7043;
+            margin-top: 15px;
+        }
+
+        /* Confirmation Message Styling */
+        .message {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        /* Go to Home Button */
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #388e3c;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="confirmation-container">
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+
+        <!-- Title -->
+        <h1>Order Confirmed!</h1>
+
+        <!-- Order Summary -->
+        <div class="order-summary" id="order-summary">
+            <!-- Order items will be displayed here -->
+        </div>
+
+        <!-- Total Amount -->
+        <p class="total-amount" id="total-amount">Total: ₹0</p>
+
+        <!-- Confirmation Message -->
+        <p class="message">Thank you for your order! Your delicious food will be on its way shortly.</p>
+
+        <!-- Go to Home Button -->
+        <a href="index.html" class="home-button">Go to Home</a>
+    </div>
+
+    <script>
+        // Retrieve order data from localStorage
+        const orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+        const totalAmount = localStorage.getItem('totalAmount') || 0;
+
+        // Populate the order summary
+        const orderSummary = document.getElementById('order-summary');
+        orderItems.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add('order-summary-item');
+            div.innerHTML = `
+                <span>${item.name} (${item.category})</span>
+                <span>${item.price}</span>
+            `;
+            orderSummary.appendChild(div);
+        });
+
+        // Display the total amount
+        document.getElementById('total-amount').textContent = `Total: ₹${totalAmount}`;
+    </script>
+</body>
+
+</html>

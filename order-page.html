@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7d7b6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 1300px;
+            background-color: #fff;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 80px;
+            background-color: #fff;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            /* Increased space between icons */
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar i {
+            font-size: 1.5rem;
+            color: #444;
+            cursor: pointer;
+        }
+
+        /* Main content */
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Search bar */
+        .search-bar {
+            background-color: #FCF596;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-bar i {
+            font-size: 1.5rem;
+            color: #444;
+            cursor: pointer;
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background-color: #ff7043;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .promo-banner span {
+            z-index: 1;
+        }
+
+        .promo-banner img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* Ensures 4 items in a row */
+            gap: 20px;
+            margin-top: 1rem;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .menu-item h4 {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .menu-item p {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .menu-item .price {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .order-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.5rem;
+        }
+
+        .order-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .order-details {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .order-btn {
+            display: inline-block;
+            width: 100%;
+            background-color: #ff7043;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 15px 0;
+            border-radius: 5px;
+            margin-top: 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .order-btn:hover {
+            background-color: #f45b22;
+        }
+
+        .remove-btn {
+            cursor: pointer;
+            font-size: 20px;
+            color: red;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .remove-btn:hover {
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <i class="fas fa-home"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-utensils"></i>
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user"></i>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Search bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search for food...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Promo Banner -->
+            <div class="promo-banner">
+                <marquee behavior="" direction="">30% Off On Fitness Meal</marquee>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="menu-section" id="menu-section">
+                <!-- Menu items will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2>My Order</h2>
+            <div id="order-list">
+                <!-- Order items will appear here -->
+            </div>
+            <hr>
+            <div class="order-summary-footer">
+                <p id="sub-total">Sub Total: ₹0</p>
+            </div>
+            <a href="javascript:void(0);" class="order-btn" onclick="placeOrder()">Place Order</a>
+        </div>
+    </div>
+
+    <script>
+        const menuItems = [
+            { name: "Panera Soup", category: "Fast-Food", price: 100, image: "panerasoup.jpg" },
+            { name: "Noodles", category: "Fast-Food", price: 150, image: "noodles.jpg" },
+            { name: "Grilled Salmon", category: "Seafood", price: 200, image: "grilledsalmon.jpg" },
+            { name: "Cheeseburger", category: "Burgers", price: 130, image: "cheese burger.jpg" },
+            { name: "Sushi Rolls", category: "Japanese", price: 70, image: "sushiroll.jpg" },
+            { name: "Pasta Carbonara", category: "Italian", price: 85, image: "pastacarbonara.jpg" },
+            { name: "Tacos", category: "Mexican", price: 80, image: "tacos.jpg" },
+            { name: "Caesar Salad", category: "Salad", price: 65, image: "Caesar Salad.jpg" },
+            { name: "Chocolate Cake", category: "Dessert", price: 120, image: "chocolatecake.jpg" },
+            { name: "Smoothie", category: "Drink", price: 80, image: "smoothie.jpg" },
+            { name: "Grilled Cheese", category: "Fast-Food", price: 170, image: "grilledcheese.jpg" },
+            { name: "Pancakes", category: "Breakfast", price: 90, image: "pancakes.jpg" },
+            { name: "Pizza Margherita", category: "Italian", price: 350, image: "pizzamargherita.jpg" },
+            { name: "Fried Chicken", category: "Fast-Food", price: 180, image: "friedchicken.jpeg" },
+            { name: "Biriyani", category: "Fast-Food", price: 150, image: "biriyani.jpg" },
+            { name: "Falafel", category: "Vegetarian", price: 100, image: "falafel.jpg" },
+            { name: "Pomfret", category: "Seafood", price: 250, image: "Pomfret.jpg" },
+            { name: "Fish Tacos", category: "Mexican", price: 220, image: "fishtacos.jpg" },
+            { name: "Ramen", category: "Japanese", price: 110, image: "ramen.jpg" },
+            { name: "Cheese Pizza", category: "Italian", price: 290, image: "cheesepizza.jpg" },
+            { name: "Egg Sandwich", category: "Breakfast", price: 90, image: "eggsandwich.jpg" },
+            { name: "Chillipaneer", category: "Fast-food", price: 180, image: "chillipaneer.jpeg" },
+            { name: "Mushroom Curry", category: "Vegetarian", price: 160, image: "mushroomcurry.jpg" },
+            { name: "Momos", category: "Snacks / Street Food", price: 80, image: "momos.jpg" }
+        ];
+
+        const menuSection = document.getElementById('menu-section');
+        const orderList = document.getElementById('order-list');
+        const subTotalElement = document.getElementById('sub-total');
+        const searchInput = document.querySelector('.search-bar input');
+        let total = 0;
+
+        // Function to update the order summary
+        function updateOrderSummary() {
+            subTotalElement.textContent = `Sub Total: ₹${total}`;
+        }
+
+        // Function to filter menu items based on search query
+        function searchItems(query) {
+            const filteredItems = menuItems.filter(item =>
+                item.name.toLowerCase().includes(query.toLowerCase()) ||
+                item.category.toLowerCase().includes(query.toLowerCase())
+            );
+
+            // Clear the current menu items
+            menuSection.innerHTML = '';
+
+            // Add filtered items to the menu
+            filteredItems.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('menu-item');
+                div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="menu-item-image">
+            <h4>${item.name}</h4>
+            <p>${item.category}</p>
+            <div class="price">₹${item.price}</div>
+        `;
+
+                // Add event listener for clicking the image to add the item to the order
+                const menuImage = div.querySelector('.menu-item-image');
+                menuImage.addEventListener('click', () => {
+                    addToOrder(item);
+                });
+
+                menuSection.appendChild(div);
+            });
+        }
+
+        // Function to add item to the order list
+        function addToOrder(item) {
+            // Create order item div
+            const orderItemDiv = document.createElement('div');
+            orderItemDiv.classList.add('order-item');
+
+            orderItemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="order-details">
+            <h4>${item.name}</h4>
+            <p>${item.category}</p>
+            <div class="price">₹${item.price}</div>
+        </div>
+        <span class="remove-btn" onclick="removeFromOrder(event)">X</span> <!-- Add remove button -->
+    `;
+
+            // Add the item to the order list
+            orderList.appendChild(orderItemDiv);
+
+            // Update total
+            total += item.price;
+            updateOrderSummary();
+        }
+
+        // Function to remove item from the order list
+        function removeFromOrder(event) {
+            // Find the order item to be removed
+            const orderItem = event.target.closest('.order-item');
+            const itemPrice = parseInt(orderItem.querySelector('.price').textContent.replace('₹', ''));
+
+            // Decrease total price
+            total -= itemPrice;
+            updateOrderSummary();
+
+            // Remove the order item from the DOM
+            orderItem.remove();
+        }
+
+        // Add menu items dynamically
+        searchItems(''); // Load all items initially
+
+        // Bind the search input to the searchItems function
+        searchInput.addEventListener('input', (e) => {
+            searchItems(e.target.value); // Update the menu based on input
+        });
+        function placeOrder() {
+            // Get all order items
+            const orderItems = Array.from(document.querySelectorAll('.order-item')).map(item => {
+                return {
+                    name: item.querySelector('h4').textContent,
+                    category: item.querySelector('p').textContent,
+                    price: item.querySelector('.price').textContent
+                };
+            });
+
+            // Store order details in localStorage
+            localStorage.setItem('orderItems', JSON.stringify(orderItems));
+            localStorage.setItem('totalAmount', total);
+
+            // Redirect to order confirmation page
+            window.location.href = 'order-confirmation.html';
+        }
+
+    </script>
+
+</body>
+
+</html>

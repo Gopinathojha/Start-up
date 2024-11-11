@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>START-UP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url('background.jpg') no-repeat center center;
+            background-size: cover;
+            /* Makes the background cover the entire screen */
+            background-attachment: fixed;
+            /* Keeps the background fixed while scrolling */
+        }
+
+
+        .background {
+            background-image: url('pic1.png');
+            background-size: 47%;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        .order-btn {
+            background-color: #e3db62;
+            color: black;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 5rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            margin-top: 2rem;
+            margin-bottom: 8rem;
+            box-shadow: 0 0 5px 0.2px;
+            font-weight: bold;
+        }
+
+        .order-btn:hover {
+            background-color: #FFD700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <h1>Welcome To Our <br> Restaurant</h1>
+        <p>From our kitchen to your plate, we deliver an unforgettable taste!</p>
+        <a href="order-page.html" class="order-btn">Start Your Order</a>
+    </div>
+</body>
+
+</html>
