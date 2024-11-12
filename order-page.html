@@ -28,7 +28,7 @@
             display: flex;
             justify-content: flex-start;
             width: 100%;
-            max-width: 1300px;
+            max-width: 1400px;
             background-color: #fff;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
@@ -45,12 +45,20 @@
             align-items: center;
             gap: 30px;
             border-right: 1px solid #ddd;
+            position: fixed;
+            /* Fixes the sidebar in place */
+            height: 100vh;
+            /* Sets sidebar to full viewport height */
+
+            left: 50;
+            z-index: 1;
         }
 
         .sidebar i {
             font-size: 1.5rem;
             color: #444;
             cursor: pointer;
+            margin-top: 1rem;
         }
 
         /* Main content */
@@ -59,6 +67,8 @@
             padding: 20px;
             padding-right: 340px;
             /* Adjusted to make space for the fixed order-summary */
+            margin-left: 100px;
+            /* Adds space for sidebar width, ensuring content doesn't collapse under it */
         }
 
         /* Search bar */
@@ -167,7 +177,7 @@
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 40px;
-            right: 125px;
+            right: 80px;
             height: fit-content;
         }
 
@@ -196,6 +206,15 @@
         .order-details {
             flex: 1;
             margin-left: 10px;
+        }
+
+        #order-list {
+            max-height: 30rem;
+            /* Set a max height as per your preference */
+            overflow-y: auto;
+            /* Enables vertical scrolling when overflow occurs */
+            padding-right: 10px;
+            /* Adds padding to avoid scrollbar overlap */
         }
 
         .order-btn {
@@ -251,7 +270,7 @@
 
             <!-- Promo Banner -->
             <div class="promo-banner">
-                <marquee behavior="" direction="">30% Off On Fitness Meal</marquee>
+                <marquee behavior="" direction="">Enjoy 30% Off on Your Next Order !</marquee>
             </div>
 
             <!-- Menu Section -->
@@ -390,12 +409,12 @@
             searchItems(e.target.value); // Update the menu based on input
         });
         function placeOrder() {
-            // Get all order items
+            // Get all order items from the DOM
             const orderItems = Array.from(document.querySelectorAll('.order-item')).map(item => {
                 return {
                     name: item.querySelector('h4').textContent,
                     category: item.querySelector('p').textContent,
-                    price: item.querySelector('.price').textContent
+                    price: parseFloat(item.querySelector('.price').textContent.replace('₹', ''))  // Ensure price is a number
                 };
             });
 
